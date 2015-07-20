@@ -8,4 +8,4 @@
 + 현재디렉토리\bob.txt, 현재디렉토리\bob2.txt 삭제
 ps. mmio 샘플 코드는 http://pastebin.com/cLQmPb6m 에 있습니다. 참고하세요.
 
-<img src="
+<img src="https://raw.githubusercontent.com/windowhan/BOB4_OS/master/20150700/44.PNG">
