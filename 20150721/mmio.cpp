@@ -23,7 +23,7 @@
 **/
 bool read_file_using_memory_map()
 {
-	// current directory ∏¶ ±∏«—¥Ÿ.
+	// current directory ?? ?????
 	wchar_t *buf = NULL;
 	uint32_t buflen = 0;
 	buflen = GetCurrentDirectoryW(buflen, buf);
@@ -41,7 +41,7 @@ bool read_file_using_memory_map()
 		return false;
 	}
 
-	// current dir \\ test.txt ∆ƒ¿œ∏Ì ª˝º∫
+	// current dir \\ test.txt ??œ∏?????
 	wchar_t file_name[260];
 	if (!SUCCEEDED(StringCbPrintfW(
 		file_name,
@@ -88,9 +88,9 @@ bool read_file_using_memory_map()
 
 	// [ WARN ]
 	//
-	// 4Gb ¿ÃªÛ¿« ∆ƒ¿œ¿« ∞ÊøÏ MapViewOfFile()ø°º≠ ø¿∑˘∞° ≥™∞≈≥™
-	// ∆ƒ¿œ ∆˜¿Œ≈Õ ¿Ãµø¿Ã πÆ¡¶∞° µ 
-	// FilIoHelperClass ∏µ‚¿ª ¿ÃøÎ«ÿæﬂ «‘
+	// 4Gb ?Ãª???????? MapViewOfFile()???? ?????? ???≈≥?
+	// ????????Ãµ????????? ??
+	// FilIoHelperClass ???? ?Ãø?ÿæ??
 	//
 	_ASSERTE(fileSize.HighPart == 0);
 	if (fileSize.HighPart > 0)
@@ -250,9 +250,9 @@ pmap_context open_map_context(_In_ const wchar_t* file_path)
 
 		// [ WARN ]
 		//
-		// 4Gb ¿ÃªÛ¿« ∆ƒ¿œ¿« ∞ÊøÏ MapViewOfFile()ø°º≠ ø¿∑˘∞° ≥™∞≈≥™
-		// ∆ƒ¿œ ∆˜¿Œ≈Õ ¿Ãµø¿Ã πÆ¡¶∞° µ 
-		// FilIoHelperClass ∏µ‚¿ª ¿ÃøÎ«ÿæﬂ «‘
+		// 4Gb ?Ãª???????? MapViewOfFile()???? ?????? ???≈≥?
+		// ????????Ãµ????????? ??
+		// FilIoHelperClass ???? ?Ãø?ÿæ??
 		//
 		_ASSERTE(fileSize.HighPart == 0);
 		if (fileSize.HighPart > 0)
@@ -316,7 +316,7 @@ pmap_context open_map_context(_In_ const wchar_t* file_path)
 **/
 pmap_context create_map_context(_In_ const wchar_t* file_path, _In_ uint32_t file_size)
 {
-	// ∆ƒ¿œ ¡∏¿Á ¿Øπ´ »Æ¿Œ
+	// ??????????? »Æ??
 	_ASSERTE(NULL != file_path);
 	if (NULL == file_path) return false;
 	if (is_file_existsW(file_path))
@@ -324,10 +324,10 @@ pmap_context create_map_context(_In_ const wchar_t* file_path, _In_ uint32_t fil
 		DeleteFileW(file_path);
 	}
 
-	// ∏  context «“¥Á
+	// ??context ???
 	pmap_context ctx = (pmap_context)malloc(sizeof(map_context));
 
-	// ∏  context √ ±‚»≠
+	// ??context ????
 	RtlZeroMemory(ctx, sizeof(map_context));
 
 	bool ret = false;
@@ -335,7 +335,7 @@ pmap_context create_map_context(_In_ const wchar_t* file_path, _In_ uint32_t fil
 #pragma warning(disable: 4127)
 	do
 	{
-		// ∆ƒ¿œ ª˝º∫
+		// ???????
 		ctx->handle = CreateFileW(
 			(LPCWSTR)file_path,
 			GENERIC_READ | GENERIC_WRITE,
@@ -398,7 +398,7 @@ pmap_context create_map_context(_In_ const wchar_t* file_path, _In_ uint32_t fil
 
 pmap_context user_create_map_context(_In_ const wchar_t* file_path, _In_ uint32_t file_size)
 {
-	// ∆ƒ¿œ ¡∏¿Á ¿Øπ´ »Æ¿Œ
+	// ??????????? »Æ??
 	_ASSERTE(NULL != file_path);
 	if (NULL == file_path) return false;
 	if (is_file_existsW(file_path))
@@ -406,10 +406,10 @@ pmap_context user_create_map_context(_In_ const wchar_t* file_path, _In_ uint32_
 		DeleteFileW(file_path);
 	}
 
-	// ∏  context «“¥Á
+	// ??context ???
 	pmap_context ctx = (pmap_context)malloc(sizeof(map_context));
 
-	// ∏  context √ ±‚»≠
+	// ??context ????
 	RtlZeroMemory(ctx, sizeof(map_context));
 
 	bool ret = false;
@@ -417,7 +417,7 @@ pmap_context user_create_map_context(_In_ const wchar_t* file_path, _In_ uint32_
 #pragma warning(disable: 4127)
 	do
 	{
-		// ∆ƒ¿œ ª˝º∫
+		// ???????
 		ctx->handle = CreateFileW(
 			(LPCWSTR)file_path,
 			GENERIC_READ | GENERIC_WRITE,
@@ -517,31 +517,9 @@ _In_ const wchar_t* dst_file
 		DeleteFileW(dst_file);
 	}
 
-	/*
-	// map src, dst file
-	pmap_context src_ctx = open_map_context(src_file);  // ø≠±‚ 
-	pmap_context dst_ctx = create_map_context(dst_file, src_ctx->size); // src_file∞˙ ∞∞¿∫ ≈©±‚∑Œ ª˝º∫«œ±‚ , ≈©±‚∏¶ ≈©∞‘¡÷∏È ø©±‚º≠ ª˝º∫¿Ã æ»µ .
-																		// µ˚∂Ûº≠ ¿€∞‘ ª˝º∫ -> ≥ªøÎ ∫Ÿø©≥÷±‚ -> ¥›±‚ -> ø≠±‚ -> ≥ªøÎ ∫Ÿø©≥÷±‚ -> ¥›±‚ -> ...
-																		// ∏¶ ∞Ëº” π›∫π«ÿº≠ 4~5±‚∞° ¬•∏Æ ∆ƒ¿œ¿ª ª˝º∫«“ ºˆ ¿÷¿Ω.
-	if (NULL == src_ctx || NULL == dst_ctx)
-	{
-		print("err ] open_map_context() failed.");
-		close_map_context(src_ctx);
-		close_map_context(dst_ctx);
-		return false;
-	}
-
-	// copy src to dst by mmio           // µ•¿Ã≈Õ ∫πªÁ«œ±‚ 
-	for (uint32_t i = 0; i < src_ctx->size; ++i)
-	{
-		dst_ctx->view[i] = src_ctx->view[i];
-	}
-	*/
-
-
 	//
-	// MapViewOfFile() «‘ºˆ¿« dwFileOffsetLow ∆ƒ∂ÛπÃ≈Õ¥¬ 
-	// SYSTEM_INFO::dwAllocationGranularity ∞™¿« πËºˆ¿ÃæÓæﬂ «—¥Ÿ.
+	// MapViewOfFile() ?????dwFileOffsetLow ??????
+	// SYSTEM_INFO::dwAllocationGranularity ???????Ãæ? ???
 	// 
 	static DWORD AllocationGranularity = 0;
 	if (0 == AllocationGranularity)
@@ -550,20 +528,6 @@ _In_ const wchar_t* dst_file
 		GetSystemInfo(&si);
 		AllocationGranularity = si.dwAllocationGranularity;
 	}
-
-	/*
-	DWORD AdjustMask = AllocationGranularity - 1;
-	LARGE_INTEGER AdjustOffset = { 0 };
-	AdjustOffset.HighPart = Offset.HighPart;
-
-	// AllocationGranularity ¿Ã«œ¿« ∞™¿ª πˆ∏≤
-	// 
-	AdjustOffset.LowPart = (Offset.LowPart & ~AdjustMask);
-
-	// πˆ∑¡¡¯ ∞™∏∏≈≠ ∏≈«Œ«“ ªÁ¿Ã¡Ó∏¶ ¡ı∞°
-	// 
-	DWORD BytesToMap = (Offset.LowPart & AdjustMask) + Size;
-	*/
 
 
 	pmap_context src_ctx = open_map_context(src_file);
@@ -577,7 +541,7 @@ _In_ const wchar_t* dst_file
 	PUCHAR buffer = (PUCHAR)malloc((uint64_t)(1024 * 1024));
 	while (FileSize.QuadPart > 0)
 	{
-		// ≥≤¿∫ ∆ƒ¿œ ≈©±‚∞° 1MB∫∏¥Ÿ ¿€¥Ÿ∏È ≥≤¿∫ ≈©±‚∏∏≈≠∏∏ ∫‰∑Œ ∏ «Œ
+		// ???? ???≈©?‚∞° 1MB?????€¥Ÿ∏????? ≈©?‚∏∏≈≠?? ?? ???
 		BytesInBlock.QuadPart = AllocationGranularity * 1;
 		if (FileSize.QuadPart < AllocationGranularity * 1)
 		{
@@ -587,43 +551,32 @@ _In_ const wchar_t* dst_file
 		dest_ctx->view = (PCHAR)MapViewOfFile(
 			dest_ctx->map,
 			FILE_MAP_WRITE,
-			(FileOffset.HighPart), // ªÛ¿ß ø¿«¡º¬
-			(FileOffset.LowPart), // «œ¿ß ø¿«¡º¬
-			BytesInBlock.QuadPart // ∏≈«Œ ªÁ¿Ã¡Ó
+			(FileOffset.HighPart), // ??? ?????
+			(FileOffset.LowPart), // ??? ?????
+			BytesInBlock.QuadPart // ???????
 			);
 		if (dest_ctx->view == NULL)
 		{
 			print("err ] MapViewOfFile( %ws ) failed. gle = %u", dst_file, GetLastError());
 			break;
 		}
-		
-		/*
-		// ¡§«ÿ¡¯ π¸¿ß∏∏≈≠ ∫πªÁ∏¶ «‘
-		for (i.QuadPart= FileOffset.QuadPart; i.QuadPart < FileOffset.QuadPart+BytesInBlock.QuadPart; i.QuadPart++)
-		{
-			a = src_ctx->view[i.QuadPart];
-			dest_ctx->view[i.QuadPart] =;
-			//printf("%d\n", src_ctx->view[i.QuadPart]);
-			//dest_ctx->view[i.QuadPart] = 1;
-		}
-		*/
-		
-		RtlMoveMemory(buffer, &src_ctx->view[FileOffset.QuadPart], BytesInBlock.QuadPart);	// πˆ∆€ 0¿∏∑Œ √ ±‚»≠«ÿ¡÷∞Ì
+
+		RtlMoveMemory(buffer, &src_ctx->view[FileOffset.QuadPart], BytesInBlock.QuadPart);	// ??? 0??????????÷∞?
 		RtlMoveMemory(&dest_ctx->view[FileOffset.QuadPart], buffer, BytesInBlock.QuadPart);
 		//RtlCopyMemory(&dest_ctx->view[FileOffset.QuadPart], &src_ctx->view[FileOffset.QuadPart], BytesInBlock.QuadPart);
 	
 
-		// ∫‰∏¶ ¥Ÿ õß¿∏π«∑Œ, ∫‰∏¶ «ÿ¡¶«—¥Ÿ.
+		// ?‰∏¶ ???????«∑? ?‰∏¶ ??????
 		UnmapViewOfFile(dest_ctx->view);
 
-		// ø¿«¡º¬ ≥≤¿∫ ≈©±‚ ∞ªΩ≈
+		// ????????? ≈©??????
 		FileOffset.QuadPart += BytesInBlock.QuadPart;
 		FileSize.QuadPart -= BytesInBlock.QuadPart;
 
 	}
 
 
-	// ∆ƒ¿œ ø¿∫Í¡ß∆ÆøÕ ∆ƒ¿œ ∏≈«Œ ø¿∫Í¡ß∆Æ∏¶ ¥›æ∆¡‹
+	// ????????∆Æ?????????????∆Æ?? ?›æ??
 	CloseHandle(dest_ctx->map);
 	CloseHandle(dest_ctx->handle);
 
